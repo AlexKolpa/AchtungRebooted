@@ -41,9 +41,12 @@ public class LevelSpawn : MonoBehaviour {
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         for (int i = 0; i < levelAmount; i++)
         {            
-            Instantiate(cube, Random.insideUnitSphere * 10, Quaternion.identity);
-            Destroy(cube);
+            GameObject cubeInst = Instantiate(cube, Random.insideUnitSphere * 10, Quaternion.identity) as GameObject;
+            cubeInst.GetComponent<MeshRenderer>().material = gameSettings.toonShader;
+            cubeInst.GetComponent<MeshRenderer>().material.color = Color.blue;
         }
+
+        Destroy(cube);
     }
 
     // Update is called once per frame
