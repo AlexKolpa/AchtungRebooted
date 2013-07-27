@@ -5,6 +5,8 @@ using System;
 
 public class Level : MonoBehaviour {
 
+    private static readonly float crowdedness = 0.05f;
+
     public int maxConnectionCount;
     List<LevelConnection> connections = new List<LevelConnection>();
     public List<LevelConnection> Connections
@@ -12,8 +14,22 @@ public class Level : MonoBehaviour {
         get { return connections; }
     }
 
-    public Level()
+    List<Transform> spawnPoints = new List<Transform>();
+    List<Transform> SpawnPoints
     {
+        get { return spawnPoints; }
+    }
+
+    List<Transform> colliders = new List<Transform>();
+    List<Transform> connectionObject = new List<Transform>();
+
+    void Awake()
+    {
+        Bounds bounds = GetComponent<Collider>().bounds;
+        Vector2 size = new Vector2(bounds.max.x - bounds.min.x, bounds.max.z - bounds.min.z);
+        int numberOfObjects = (int)(crowdedness * size.magnitude) + connections.Count;
+        int xSteps = (int)(size.x / size.y * numberOfObjects);
+        int ySteps = 
     }
 
 	// Use this for initialization
